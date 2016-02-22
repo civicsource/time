@@ -1,5 +1,6 @@
 ﻿{
   "version": "1.0.0",
+  "title": "SystemClock Time Utilities",
   "description": "Time-related utility classes that will help in testing apps that rely on dates and times for logic",
   "authors": [ "Archon Information Systems, LLC" ],
   "tags": [ "utility", "datetime", "clock", "date", "time", "systemclock", "mock time" ],
