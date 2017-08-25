@@ -3,7 +3,5 @@ obj
 artifacts
 packages
 .vs
-project.lock.json
-AssemblyVersion.cs
 *.suo
 *.user

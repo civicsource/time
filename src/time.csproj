@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <AssemblyName>Archon.Time</AssemblyName>
+    <RootNamespace>Archon</RootNamespace>
+    <PackageTags>utility datetime clock date time systemclock mock</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/civicsource/time.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/civicsource/time</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/civicsource/time/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright (c) 2017 Archon Information Systems, LLC.</Copyright>
+    <Authors>Archon Information Systems, LLC.</Authors>
+    <Company>Archon Information Systems, LLC.</Company>
+    <Product>System Clock Time Utilities</Product>
+    <Description>Time-related utility classes that will help in testing apps that rely on dates and times for logic</Description>
+    <PackageReleaseNotes>https://github.com/civicsource/time/releases</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+</Project>

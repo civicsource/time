@@ -7,7 +7,7 @@
 Install via [nuget](https://www.nuget.org/packages/Archon.Time/)
 
 ```
-install-package Archon.Time
+dotnet add Archon.Time
 ```
 
 The following utilities can be found in the `Archon` namespace.
