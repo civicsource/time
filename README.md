@@ -14,25 +14,71 @@ The following utilities can be found in the `Archon` namespace.
 
 ### `SystemClock`
 
-You can use `SystemClock` the same way you would use `System.DateTime`:
+You can use the `SystemClock` interface in the same places you were previously using `System.DateTime.UtcNow`:
 
 ```cs
-DateTime utcNow = SystemClock.UtcNow;
-DateTime now = SystemClock.Now;
+SystemClock clock = new RealSystemClock();
+
+DateTime utcNow = clock.UtcNow;
+DateTime now = clock.Now;
 ```
 
-You can freeze the current time by setting one of the properties:
+This is not very useful by itself, but when writing tests for components that depend on the current time, you can inject a `FrozenSystemClock` instead:
 
 ```cs
-SystemClock.UtcNow = new DateTime(2016, 02, 22, 13, 52, 46); //freeze the current time
+public class Component
+{
+	readonly SystemClock clock;
 
-DateTime utcNow = SystemClock.UtcNow; //will equal the frozen Time
-DateTime now = SystemClock.Now; //will equal the frozen time offset by the current timezone
+	public Component(SystemClock clock)
+	{
+		this.clock = clock;
+	}
 
-SystemClock.Reset(); //SystemClock.UtcNow & Now will return the current time once again
+	public string SayHello()
+	{
+		if (clock.Now.Hour >= 12)
+		{
+			return "Good afternoon";
+		}
+		else
+		{
+			return "Good morning";
+		}
+	}
+}
+
+public class Tests
+{
+	readonly FrozenSystemClock clock;
+	readonly Component component;
+
+	public Tests()
+	{
+		clock = new FrozenSystemClock(); // will freeze the clock at the current time
+		component = new Component(clock);
+	}
+
+	[Xunit.Fact]
+	public void ShouldSayGoodMorning()
+	{
+		DateTime nineam = new DateTime(2017, 9, 14, 9, 00, 00, DateTimeKind.Local).ToUniversalTime();
+		clock.Reset(nineam); // reset to 9am
+		Assert.Equal("Good morning", component.SayHello());
+	}
+
+	[Xunit.Fact]
+	public void ShouldSayGoodAfternoon()
+	{
+		DateTime twopm = new DateTime(2017, 9, 14, 14, 00, 00, DateTimeKind.Local).ToUniversalTime();
+		clock.Reset(twopm); // reset to 2pm
+		Assert.Equal("Good afternoon", component.SayHello());
+	}
+}
+
 ```
 
-This allows you to mock the current time for test cases when testing logic that requires date/time manipulations.
+If you just create a new `FrozenSytemClock` using the default constructor, it will freeze the current time. You can also use the overload that takes a specific time to freeze. It has a number of convenience methods on it for adding months, days, seconds, etc. to the current frozen time to allow you to move time backwards and forwards within your tests.
 
 ### `AssumeUtc`
 

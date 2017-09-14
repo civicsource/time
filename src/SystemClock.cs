@@ -5,30 +5,16 @@ namespace Archon
 	/// <summary>
 	/// Aids in unit testing by providing a mockable way to get the current time.
 	/// </summary>
-	public static class SystemClock
+	public interface SystemClock
 	{
-		private static DateTime? _utcNow;
+		/// <summary>
+		/// Gets the current time in UTC
+		/// </summary>
+		DateTime UtcNow { get; }
 
-		public static DateTime UtcNow
-		{
-			get
-			{
-				if (_utcNow.HasValue)
-					return _utcNow.Value;
-				return DateTime.UtcNow;
-			}
-			set { _utcNow = value; }
-		}
-
-		public static DateTime Now
-		{
-			get { return UtcNow.ToLocalTime(); }
-			set { UtcNow = value.ToUniversalTime(); }
-		}
-
-		public static void Reset()
-		{
-			_utcNow = null;
-		}
+		/// <summary>
+		/// Gets the current local time
+		/// </summary>
+		DateTime Now { get; }
 	}
 }
