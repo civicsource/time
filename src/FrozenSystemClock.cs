@@ -48,10 +48,7 @@ namespace Archon
 		/// <param name="frozenTimeUtc">The UTC time to freeze</param>
 		public void Reset(DateTime frozenTimeUtc)
 		{
-			if (frozenTimeUtc.Kind != DateTimeKind.Utc)
-				throw new ArgumentException("Value must be a UTC DateTime.", nameof(frozenTimeUtc));
-
-			frozen = frozenTimeUtc;
+			frozen = frozenTimeUtc.AssumeUtc(nameof(frozenTimeUtc));
 		}
 
 		/// <summary>
