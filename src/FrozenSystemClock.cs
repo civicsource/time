@@ -37,72 +37,79 @@ namespace Archon
 		/// <summary>
 		/// Reset the current frozen time to DateTime.UtcNow
 		/// </summary>
-		public void Reset()
+		public DateTime Reset()
 		{
-			Reset(DateTime.UtcNow);
+			return Reset(DateTime.UtcNow);
 		}
 
 		/// <summary>
 		/// Reset the current frozen time to the specified UTC time
 		/// </summary>
 		/// <param name="frozenTimeUtc">The UTC time to freeze</param>
-		public void Reset(DateTime frozenTimeUtc)
+		public DateTime Reset(DateTime frozenTimeUtc)
 		{
 			frozen = frozenTimeUtc.AssumeUtc(nameof(frozenTimeUtc));
+			return frozen;
 		}
 
 		/// <summary>
 		/// Add years to the current frozen time
 		/// </summary>
 		/// <param name="value">The number of years</param>
-		public void AddYears(int value)
+		public DateTime AddYears(int value)
 		{
 			frozen = frozen.AddYears(value);
+			return frozen;
 		}
 
 		/// <summary>
 		/// Add months to the current frozen time
 		/// </summary>
 		/// <param name="value">The number of months</param>
-		public void AddMonths(int value)
+		public DateTime AddMonths(int value)
 		{
 			frozen = frozen.AddMonths(value);
+			return frozen;
 		}
 
 		/// <summary>
 		/// Add days to the current frozen time
 		/// </summary>
 		/// <param name="value">The number of days</param>
-		public void AddDays(double value)
+		public DateTime AddDays(double value)
 		{
 			frozen = frozen.AddDays(value);
+			return frozen;
 		}
 
 		/// <summary>
 		/// Add hours to the current frozen time
 		/// </summary>
 		/// <param name="value">The number of hours</param>
-		public void AddHours(double value)
+		public DateTime AddHours(double value)
 		{
 			frozen = frozen.AddHours(value);
+			return frozen;
 		}
 
 		/// <summary>
 		/// Add minutes to the current frozen time
 		/// </summary>
 		/// <param name="value">The number of minutes</param>
-		public void AddMinutes(double value)
+		public DateTime AddMinutes(double value)
 		{
 			frozen = frozen.AddMinutes(value);
+			return frozen;
 		}
 
 		/// <summary>
 		/// Add seconds to the current frozen time
 		/// </summary>
 		/// <param name="value">The number of seconds</param>
-		public void AddSeconds(double value)
+		public DateTime AddSeconds(double value)
 		{
 			frozen = frozen.AddSeconds(value);
+			return frozen;
 		}
 
 		/// <summary>
